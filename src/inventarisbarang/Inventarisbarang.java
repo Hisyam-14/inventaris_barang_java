@@ -26,7 +26,7 @@ public class Inventarisbarang {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
+
         String adminName;
         do {
             System.out.print("Masukkan nama admin: ");
@@ -53,32 +53,48 @@ public class Inventarisbarang {
             System.out.println("4. Tampilkan Semua Barang");
             System.out.println("5. Keluar");
             System.out.print("Pilih opsi: ");
-            int opsi = scanner.nextInt();
+            
+            // Mengambil input sebagai string
+            String input = scanner.nextLine().trim();
 
-            switch (opsi) {
-                case 1:
-                    barangCRUD.tambahBarang();
-                    inventaris.totalBarang++; // Menambah total barang
-                    break;
-                case 2:
-                    barangCRUD.updateBarang();
-                    break;
-                case 3:
-                    barangCRUD.hapusBarang();
-                    if (inventaris.totalBarang > 0) {
-                        inventaris.totalBarang--; // Mengurangi total barang
-                    }
-                    break;
-                case 4:
-                    barangCRUD.tampilkanSemuaBarang();
-                    break;
-                case 5:
-                    System.out.println("Keluar dari program.");
-                    inventaris.isRunning = false; // Mengubah status isRunning menjadi false
-                    break;
-                default:
-                    System.out.println("Opsi tidak valid, coba lagi.");
-                    break;
+            // Cek jika input kosong
+            if (input.isEmpty()) {
+                System.out.println("Error: Tidak boleh kosong. Silakan coba lagi.");
+                continue; // Kembali ke loop awal untuk meminta input lagi
+            }
+
+            try {
+                // Parsing input menjadi integer
+                int opsi = Integer.parseInt(input);
+
+                switch (opsi) {
+                    case 1:
+                        barangCRUD.tambahBarang();
+                        inventaris.totalBarang++; // Menambah total barang
+                        break;
+                    case 2:
+                        barangCRUD.updateBarang();
+                        break;
+                    case 3:
+                        barangCRUD.hapusBarang();
+                        if (inventaris.totalBarang > 0) {
+                            inventaris.totalBarang--; // Mengurangi total barang
+                        }
+                        break;
+                    case 4:
+                        barangCRUD.tampilkanSemuaBarang();
+                        break;
+                    case 5:
+                        System.out.println("Keluar dari program.");
+                        inventaris.isRunning = false; // Mengubah status isRunning menjadi false
+                        break;
+                    default:
+                        System.out.println("Opsi tidak valid, coba lagi.");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                // Menangani kesalahan jika input bukan angka
+                System.out.println("Error: Input harus berupa angka. Silakan coba lagi.");
             }
         }
 
