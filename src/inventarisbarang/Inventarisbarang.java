@@ -23,6 +23,18 @@ public class Inventarisbarang {
         this.totalBarang = 0;  // Awalnya, tidak ada barang
         this.isRunning = true; // Program dalam status berjalan
     }
+    
+    public void tampilkanMenu() {
+        System.out.println("\n=== Menu Inventaris Barang ===");
+        System.out.println("Admin: " + adminName); // Menampilkan nama admin
+        System.out.println("Total Barang: " + totalBarang); // Menampilkan total barang
+        System.out.println("1. Tambah Barang");
+        System.out.println("2. Update Stok Barang");
+        System.out.println("3. Hapus Barang");
+        System.out.println("4. Tampilkan Semua Barang");
+        System.out.println("5. Keluar");
+        System.out.print("Pilih opsi: ");
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -43,16 +55,9 @@ public class Inventarisbarang {
         // Menginisialisasi BarangCRUD tanpa nama admin
         BarangCRUD barangCRUD = new BarangCRUD();
 
-        while (inventaris.isRunning) { // Menggunakan properti isRunning
-            System.out.println("\n=== Menu Inventaris Barang ===");
-            System.out.println("Admin: " + inventaris.adminName); // Menampilkan nama admin
-            System.out.println("Total Barang: " + inventaris.totalBarang); // Menampilkan total barang
-            System.out.println("1. Tambah Barang");
-            System.out.println("2. Update Stok Barang");
-            System.out.println("3. Hapus Barang");
-            System.out.println("4. Tampilkan Semua Barang");
-            System.out.println("5. Keluar");
-            System.out.print("Pilih opsi: ");
+        while (inventaris.isRunning) {
+            // Panggil method tampilkanMenu
+            inventaris.tampilkanMenu();
             
             // Mengambil input sebagai string
             String input = scanner.nextLine().trim();
